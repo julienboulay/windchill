@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<project name="common-env" default="">
+
+  <taskdef resource="net/sf/antcontrib/antlib.xml"/> 
+	
+  <property environment="env" />
+  <!--On Windows the hostname is in the environment variable "COMPUTERNAME"
+	On Linux the environment variable is "HOSTNAME" -->
+  <property name="env.HOSTNAME" value="${env.COMPUTERNAME}"/>
+  <property name="host.name" value="${env.HOSTNAME}"/>
+  <property name="wt.home" value="${env.WT_HOME}" />
+  <property name="wt.jdk" value="${wt.home}/../Java" />
+  <property name="wt.bin" value="${wt.home}${file.separator}bin" />
+  <property name="wt.codebase" value="${wt.home}${file.separator}codebase" />
+  <property name="wt.codebase.gwt" value="${wt.codebase}${file.separator}gwt" />
+  <property name="wt.codebase.lib" value="${wt.codebase}${file.separator}lib" />
+  <property name="wt.codebase.webinf" value="${wt.codebase}${file.separator}WEB-INF" />
+  <property name="wt.codebase.webinf.lib" value="${wt.codebase.webinf}${file.separator}lib" />
+  <property name="wt.db.sql" value="${wt.home}${file.separator}db${file.separator}sql"/>
+  <property name="wt.installer" value="${wt.home}${file.separator}installer"/>
+  <property name="wt.lib" value="${wt.home}${file.separator}lib" />
+  <property name="wt.loadFiles" value="${wt.home}${file.separator}loadFiles" />
+  <property name="wt.safeArea" value="${wt.home}${file.separator}wtSafeArea" />
+  <property name="wt.safeArea.siteMod" value="${wt.safeArea}${file.separator}siteMod" />
+  <property name="wt.safeArea.ptcOrig" value="${wt.safeArea}${file.separator}ptcOrig" />
+  <property name="wt.src" value="${wt.home}${file.separator}src" />
+  <property name="wt.srclib" value="${wt.home}${file.separator}srclib" />
+  <property name="wt.srclib.wnc" value="${wt.srclib}${file.separator}wnc" />
+  <property name="wt.wtCustom" value="${wt.home}${file.separator}wtCustom" />
+
+  <property name="jaxwsXmlFile" value="${wt.codebase.webinf}${file.separator}sun-jaxws.xml" />
+  <property name="webXmlFile" value="${wt.codebase.webinf}${file.separator}web.xml" />
+	
+  <path id="wt.classpath">
+			<!-- Codebase java classes -->
+			<pathelement location="${wt.codebase}" />
+
+			<!-- Windchill lib -->
+			<fileset dir="${wt.lib}" includes="**/*.jar" />
+			<fileset dir="${wt.srclib}" includes="groovy-all.jar" />
+			<fileset dir="${wt.codebase.webinf.lib}" includes="**/*.jar" />
+  </path>
+	
+  <target name="initWindchillVersion" >
+  	<java classpathref="wt.classpath" classname="wt.util.version.WindchillVersion" outputproperty="windchill.fullVersion" fork="true" />
+  	<propertyregex property="windchill.version" input="${windchill.fullVersion}" regexp="wnc\.([^\s]*)" select="\1" casesensitive="false" />
+  </target>
+
+  <taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="wt.classpath"/>
+  
+  
+</project>
