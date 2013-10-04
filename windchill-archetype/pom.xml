@@ -13,5 +13,6 @@
 
 	<modules>
 		<module>windchill-archetype-simple</module>
+		<module>windchill-archetype-advanced</module>
 	</modules>
 </project>
