@@ -16,7 +16,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>maven-archetype</packaging>
 
-	<name>windchill-archetype-simple</name>
+	<name>>windchill-archetype-advanced</name>
 
 
 	<build>
