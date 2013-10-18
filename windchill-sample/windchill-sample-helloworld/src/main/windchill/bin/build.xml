@@ -11,6 +11,7 @@
 		<mvnInstallFile file="${wt.srclib}${file.separator}wnc${file.separator}Boot.jar" groupId="com.ptc.wnc" artifactId="Boot" version="${windchill.version}" />
 		<mvnInstallFile file="${wt.srclib}${file.separator}log4j.jar" groupId="com.ptc" artifactId="log4j" version="${windchill.version}" />
 		<mvnInstallFile file="${wt.srclib}${file.separator}jmxcore${file.separator}WtHttpClientAddOns.jar" groupId="com.ptc.jmxcore" artifactId="WtHttpClientAddOns" version="${windchill.version}" />
+		<mvnInstallFile file="${wt.srclib}${file.separator}servlet.jar" groupId="com.ptc" artifactId="servlet" version="${windchill.version}" />
 		
 	</target>
 
