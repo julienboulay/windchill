@@ -3,6 +3,10 @@
 	<import file="./common-env.xml" />
 
 	<property name="m2" value="${env.M2}" />
+	
+	<condition property="m2.executable" value="${m2}\mvn.bat" else="${m2}\mvn">
+		<os family="windows" />
+	</condition>
 
 	<target name="help" depends="">
 		<echo message="Execute ant for a project with -projecthelp argument." />
@@ -62,7 +66,7 @@
 			ArtifactId	: @{artifactId}
 			Version : @{version}
 			</echo>
-			<exec executable="${m2}\mvn.bat">
+			<exec executable="${m2.executable}">
 				<arg line="install:install-file -Dfile=@{file} -DgroupId=@{groupId} -DartifactId=@{artifactId} -Dversion=@{version} -Dpackaging=@{packaging} -DgeneratePom=@{generatePom} -DcreateChecksum=@{createChecksum}" />
 			</exec>
 		</sequential>
