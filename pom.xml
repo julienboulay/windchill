@@ -8,7 +8,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>windchill-commons</module>
 		<module>windchill-archetype</module>
+		<module>windchill-sample</module>
 	</modules>
 
 	<properties>

@@ -66,7 +66,6 @@
 			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 	<build>
 		<testResources>
@@ -91,6 +90,11 @@
 								<artifactId>ant</artifactId>
 							</exclusion>
 						</exclusions>
+					</dependency>
+					<dependency>
+						<groupId>fr.ekito.windchill</groupId>
+						<artifactId>windchill-commons-ant</artifactId>
+						<version>0.0.1-SNAPSHOT</version>
 					</dependency>
 					<dependency>
 						<groupId>org.apache.ant</groupId>

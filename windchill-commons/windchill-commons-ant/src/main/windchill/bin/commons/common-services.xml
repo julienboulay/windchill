@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<project name="common-services" default="" xmlns:antc="antlib:net.sf.antcontrib">
+
+	<import file="./common-env.xml" />
+
+	<target name="windchill:debug" unless="isDebugEnabled" depends="-checkDebugEnabled"
+		description="Activate debug mode on Method Server">
+		<echo>Enabling debug mode...</echo>
+		<antcall target="windchill:stop"/>
+		<XConfManager Args="-s wt.manager.cmd.MethodServer.debug.args=-agentlib\:jdwp\=transport\=dt_socket,address\=9000,server\=y,suspend\=n -t wt.properties -p"/>
+		<antcall target="windchill:start"/>
+	</target>
+	
+	<target name="-checkDebugEnabled">
+		<loadfile property="debug.status" srcfile="${wt.codebase}${file.separator}wt.properties">
+			<filterchain>
+				<linecontainsregexp>
+					<regexp pattern='^wt.manager.cmd.MethodServer.debug.args=*' />
+				</linecontainsregexp>
+			</filterchain>
+		</loadfile>
+		<antc:if>
+			<contains string="${debug.status}" substring="-agentlib" />
+			<antc:then>
+				<property name="isDebugEnabled" value="true"/>
+				<echo>Windchill Method Server debug is already enabled</echo>
+			</antc:then>
+			<antc:else>
+				<echo>Windchill Method Server debug is not enabled</echo>
+			</antc:else>
+		</antc:if>
+	</target>
+	
+	<target name="windchill:stop" description="Stops windchill services">
+		<ant antfile="${wt.bin}/windchill.xml" target="stop_windchill_services"/>
+	</target>
+
+	<target name="windchill:start" description="Starts windchill services">
+		<ant antfile="${wt.bin}/windchill.xml" target="start_windchill_services"/>
+	</target>
+
+</project>
