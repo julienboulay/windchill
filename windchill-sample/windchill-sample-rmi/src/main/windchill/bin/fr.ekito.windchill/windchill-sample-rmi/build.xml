@@ -1,0 +1,18 @@
+<project name="windchill-sample-rmi" xmlns:antc="antlib:net.sf.antcontrib" basedir="../../../..">
+
+	<property name="commons-ant.dir" value="..${file.separator}windchill-commons-ant"/>
+
+	<import file="${commons-ant.dir}${file.separator}common-env.xml" />
+	<import file="${commons-ant.dir}${file.separator}common-services.xml" />
+
+	<target name="deploy">
+		<copy todir="${wt.codebase.webinf.lib}" preservelastmodified="true">
+			<fileset dir="${basedir}${file.separator}target${file.separator}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="pre-integration-test" depends="windchill:stop, deploy, windchill:start" />
+	
+</project>
