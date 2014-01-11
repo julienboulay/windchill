@@ -13,34 +13,20 @@
 		<echo message="   ant -projecthelp" />
 	</target>
 
-	<target name="mavenInstallAllWindchillJars" depends="initWindchillVersion">
-		<jar destfile="${user.home}/tmp/windchill.jar"
+	<target name="mavenInstallWindchillCodebase" depends="initWindchillVersion" description="Install Windchill codebase in maven local repository">
+		<jar destfile="${user.home}/tmp/codebase.jar"
 		       basedir="${wt.codebase}"
-		       includes="**/*.class"
+		       includes="**/*.class,**/*.ser"
 		  />
-		<mvnInstallFile file="${user.home}/tmp/windchill.jar" groupid="com.ptc" artifactid="windchill" version="${windchill.version}"/>
+		<mvnInstallFile file="${user.home}/tmp/codebase.jar" groupid="com.ptc" artifactid="codebase" version="${windchill.version}"/>
 
 		<!--Windchill libraries provided dependencies-->
-		<mvnInstallFile file="${wt.lib}${file.separator}wnc.jar" groupid="com.ptc" artifactid="wnc" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.lib}${file.separator}pdml.jar" groupid="com.ptc" artifactid="pdml" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.lib}${file.separator}pjl.jar" groupid="com.ptc" artifactid="pjl" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.lib}${file.separator}reql.jar" groupid="com.ptc" artifactid="reql" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.lib}${file.separator}servlet.jar" groupid="com.ptc" artifactid="servlet" version="${windchill.version}"/>
-
-		<mvnInstallFile file="${wt.codebase.webinf.lib}${file.separator}wncWeb.jar" groupid="com.ptc" artifactid="wncWeb" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.codebase.webinf.lib}${file.separator}pdmlWeb.jar" groupid="com.ptc" artifactid="pdmlWeb" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.codebase.webinf.lib}${file.separator}pjlWeb.jar" groupid="com.ptc" artifactid="pjlWeb" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.codebase.webinf.lib}${file.separator}reqlWeb.jar" groupid="com.ptc" artifactid="reqlWeb" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.codebase.webinf.lib}${file.separator}ie3rdpartylibs.jar" groupid="com.ptc" artifactid="ie3rdpartylibs" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.codebase.webinf.lib}${file.separator}wc3rdpartylibs.jar" groupid="com.ptc" artifactid="wc3rdpartylibs" version="${windchill.version}"/>
-		<mvnInstallFile file="${wt.codebase.webinf.lib}${file.separator}RMWebServices.jar" groupid="com.ptc" artifactid="RMWebServices" version="${windchill.version}"/>
-
+		<mvnInstallJarFolder folder="${wt.lib}" groupid="com.ptc" version="${windchill.version}" />
+		<mvnInstallJarFolder folder="${wt.codebase.webinf.lib}" groupid="com.ptc" version="${windchill.version}" />
+		
 		<!--Windchill libraries for annotations processing-->
 		<mvnInstallFile file="${wt.srclib}${file.separator}tool${file.separator}Annotations.jar" groupid="com.ptc" artifactid="Annotations" version="${windchill.version}"/>
 		<mvnInstallFile file="${wt.srclib}${file.separator}tool${file.separator}AnnotationProcessing.jar" groupid="com.ptc" artifactid="AnnotationProcessing" version="${windchill.version}"/>
-
-		<!--Windchill libraries test dependencies-->
-		<mvnInstallFile file="${wt.srclib}${file.separator}wnc${file.separator}Boot.jar" groupid="com.ptc" artifactid="Boot" version="${windchill.version}"/>
 
 	</target>
 
