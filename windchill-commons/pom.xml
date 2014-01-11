@@ -12,7 +12,6 @@
 
 	<modules>
 		<module>windchill-commons-ant</module>
-		<module>windchill-commons-assemblies</module>
 	</modules>
 	
 	
