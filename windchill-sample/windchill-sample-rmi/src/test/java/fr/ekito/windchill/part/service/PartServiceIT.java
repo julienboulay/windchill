@@ -15,33 +15,14 @@ import wt.util.WTException;
 
 public class PartServiceIT {
 
-	private static final String WT_USERNAME = "wt.admin.username";
-	private static final String WT_PASSWORD = "wt.admin.password";
-
 	private RemoteMethodServer remotemethodserver;
 
 	@Before
 	public void init() {
 
-		try {
-			InputStream propsStream = PartServiceIT.class.getClassLoader()
-					.getResourceAsStream("connection-parameters.properties");
-			Properties props = new Properties();
-			props.load(propsStream);
-
-			String wtUsername = props.getProperty(WT_USERNAME);
-			String wtPassword = props.getProperty(WT_PASSWORD);
-
-			remotemethodserver = RemoteMethodServer.getDefault();
-			remotemethodserver.setUserName(wtUsername);
-			remotemethodserver.setPassword(wtPassword);
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		remotemethodserver = RemoteMethodServer.getDefault();
+		remotemethodserver.setUserName("wcadmin");
+		remotemethodserver.setPassword("wcadmin");
 	}
 
 	@Test

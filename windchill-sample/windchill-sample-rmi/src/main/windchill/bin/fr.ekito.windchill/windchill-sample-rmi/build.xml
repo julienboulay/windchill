@@ -1,12 +1,36 @@
 <project name="windchill-sample-rmi" xmlns:antc="antlib:net.sf.antcontrib" basedir="../../../..">
 
-	<property name="commons-ant.dir" value="..${file.separator}windchill-commons-ant"/>
+	<property environment="env" />
+	<property name="wt.home" value="${env.WT_HOME}" />
+	<property name="wt.bin" value="${wt.home}${file.separator}bin" />
+	<property name="wt.codebase" value="${wt.home}${file.separator}codebase" />
+	<property name="wt.codebase.webinf" value="${wt.codebase}${file.separator}WEB-INF" />
+	<property name="wt.codebase.webinf.lib" value="${wt.codebase.webinf}${file.separator}lib" />
+	<property name="wt.lib" value="${wt.home}${file.separator}lib" />
+	<property name="wt.srclib" value="${wt.home}${file.separator}srclib" />
 
-	<import file="${commons-ant.dir}${file.separator}common-env.xml" />
-	<import file="${commons-ant.dir}${file.separator}common-services.xml" />
+	<path id="wt.classpath">
+		<!-- Codebase java classes -->
+		<pathelement location="${wt.codebase}" />
+
+		<!-- Windchill lib -->
+		<fileset dir="${wt.lib}" includes="**/*.jar" />
+		<fileset dir="${wt.srclib}" includes="groovy-all.jar" />
+		<fileset dir="${wt.codebase.webinf.lib}" includes="**/*.jar" />
+	</path>
+
+	<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="wt.classpath"/>
+
+	<target name="windchill:stop" description="Stops windchill services">
+		<ant antfile="${wt.bin}${file.separator}/windchill.xml" target="stop_windchill_services"/>
+	</target>
+
+	<target name="windchill:start" description="Starts windchill services">
+		<ant antfile="${wt.bin}${file.separator}windchill.xml" target="start_windchill_services"/>
+	</target>
 
 	<target name="deploy">
-		<copy todir="${wt.codebase.webinf.lib}" preservelastmodified="true">
+		<copy todir="${wt.codebase.webinf.lib}">
 			<fileset dir="${basedir}${file.separator}target${file.separator}">
 				<include name="**/*.jar"/>
 			</fileset>
@@ -14,5 +38,5 @@
 	</target>
 
 	<target name="pre-integration-test" depends="windchill:stop, deploy, windchill:start" />
-	
+
 </project>

@@ -9,83 +9,31 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<windchill.version>10.1.40.14</windchill.version>
-		<windchill.scope>provided</windchill.scope>
-		<windchill-commons-ant.version>0.0.1-SNAPSHOT</windchill-commons-ant.version>
-
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<maven.compile.source>1.6</maven.compile.source>
-		<maven.compile.target>1.6</maven.compile.target>
-
 		<wt.home>${env.WT_HOME}</wt.home>
 		<java.home>${env.JAVA_HOME}</java.home>
 		<ant.home>${env.ANT_HOME}</ant.home>
 	</properties>
 
 	<dependencies>
-		<!-- windchill-commons-ant dependency -->
-		<dependency>
-			<groupId>fr.ekito.windchill</groupId>
-			<artifactId>windchill-commons-ant</artifactId>
-			<version>${windchill-commons-ant.version}</version>
-		</dependency>
 
 		<!-- Windchill dependencies -->
 		<dependency>
 			<groupId>com.ptc</groupId>
-			<artifactId>windchill</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.ptc</groupId>
-			<artifactId>wnc</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.ptc</groupId>
-			<artifactId>wncWeb</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.ptc</groupId>
-			<artifactId>pdml</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.ptc</groupId>
-			<artifactId>pdmlWeb</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.ptc</groupId>
-			<artifactId>servlet</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
+			<artifactId>codebase</artifactId>
+			<version>10.1.40.14</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.ptc</groupId>
 			<artifactId>Annotations</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.ptc</groupId>
-			<artifactId>wc3rdpartylibs</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
+			<version>10.1.40.14</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.ptc</groupId>
 			<artifactId>ie3rdpartylibs</artifactId>
-			<version>${windchill.version}</version>
-			<scope>${windchill.scope}</scope>
+			<version>10.1.40.14</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Testing dependencies -->
@@ -95,85 +43,18 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.ptc</groupId>
-			<artifactId>boot</artifactId>
-			<version>${windchill.version}</version>
-			<scope>test</scope>
-		</dependency>
 
 	</dependencies>
 	<build>
-		<testResources>
-			<testResource>
-				<directory>src/test/resources</directory>
-				<filtering>true</filtering>
-			</testResource>
-		</testResources>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.8</version>
-				<executions>
-					<execution>
-						<id>unpack</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<artifactItems>
-						<artifactItem>
-							<groupId>fr.ekito.windchill</groupId>
-							<artifactId>windchill-commons-ant</artifactId>
-							<version>0.0.1-SNAPSHOT</version>
-							<type>jar</type>
-							<classifier>windchill</classifier>
-							<overWrite>true</overWrite>
-							<outputDirectory>src/main/windchill</outputDirectory>
-							<excludes>META-INF/</excludes>
-						</artifactItem>
-					</artifactItems>
-					<!-- other configurations here -->
-				</configuration>
-			</plugin>
-			<plugin>
-				<inherited>true</inherited>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<target>${maven.compile.target}</target>
-					<source>${maven.compile.source}</source>
-					<encoding>${project.build.sourceEncoding}</encoding>
+					<target>1.6</target>
+					<source>1.6</source>
 					<executable>${java.home}/bin/javac</executable>
 					<fork>fork</fork>
-					<compilerArgument>-proc:none</compilerArgument>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<inherited>true</inherited>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<includePom>true</includePom>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -209,7 +90,7 @@
 						<configuration>
 							<target>
 								<ant
-									antfile="${basedir}${file.separator}src${file.separator}main${file.separator}windchill${file.separator}bin${file.separator}${groupId}${file.separator}${artifactId}${file.separator}build.xml">
+									antfile="${basedir}${file.separator}src${file.separator}main${file.separator}windchill${file.separator}bin${file.separator}${project.groupId}${file.separator}${project.artifactId}${file.separator}build.xml">
 									<target name="pre-integration-test" />
 								</ant>
 							</target>
@@ -239,41 +120,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-dependency-plugin
-										</artifactId>
-										<versionRange>
-											[2.8,)
-										</versionRange>
-										<goals>
-											<goal>unpack</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 </project>
