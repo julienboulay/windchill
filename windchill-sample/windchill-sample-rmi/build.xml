@@ -1,4 +1,4 @@
-<project name="windchill-sample-rmi" xmlns:antc="antlib:net.sf.antcontrib" basedir="../../../..">
+<project name="windchill-sample-rmi" xmlns:antc="antlib:net.sf.antcontrib" basedir=".">
 
 	<property environment="env" />
 	<property name="wt.home" value="${env.WT_HOME}" />
@@ -6,20 +6,8 @@
 	<property name="wt.codebase" value="${wt.home}${file.separator}codebase" />
 	<property name="wt.codebase.webinf" value="${wt.codebase}${file.separator}WEB-INF" />
 	<property name="wt.codebase.webinf.lib" value="${wt.codebase.webinf}${file.separator}lib" />
-	<property name="wt.lib" value="${wt.home}${file.separator}lib" />
-	<property name="wt.srclib" value="${wt.home}${file.separator}srclib" />
 
-	<path id="wt.classpath">
-		<!-- Codebase java classes -->
-		<pathelement location="${wt.codebase}" />
-
-		<!-- Windchill lib -->
-		<fileset dir="${wt.lib}" includes="**/*.jar" />
-		<fileset dir="${wt.srclib}" includes="groovy-all.jar" />
-		<fileset dir="${wt.codebase.webinf.lib}" includes="**/*.jar" />
-	</path>
-
-	<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" classpathref="wt.classpath"/>
+	<taskdef name="groovy" classname="org.codehaus.groovy.ant.Groovy" />
 
 	<target name="windchill:stop" description="Stops windchill services">
 		<ant antfile="${wt.bin}${file.separator}/windchill.xml" target="stop_windchill_services"/>
