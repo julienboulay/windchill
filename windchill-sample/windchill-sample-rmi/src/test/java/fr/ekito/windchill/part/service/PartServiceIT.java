@@ -1,12 +1,7 @@
 package fr.ekito.windchill.part.service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.util.Properties;
-
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import wt.fc.QueryResult;
@@ -15,10 +10,10 @@ import wt.util.WTException;
 
 public class PartServiceIT {
 
-	private RemoteMethodServer remotemethodserver;
+	private static RemoteMethodServer remotemethodserver;
 
-	@Before
-	public void init() {
+	@BeforeClass
+	public static void init() {
 
 		remotemethodserver = RemoteMethodServer.getDefault();
 		remotemethodserver.setUserName("wcadmin");
@@ -35,7 +30,6 @@ public class PartServiceIT {
 			System.out.println("Result size : " + result.size());
 
 		} catch (WTException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Assert.assertNotNull(result);
