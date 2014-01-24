@@ -90,7 +90,7 @@
 						<configuration>
 							<target>
 								<ant
-									antfile="${basedir}${file.separator}src${file.separator}main${file.separator}windchill${file.separator}bin${file.separator}${project.groupId}${file.separator}${project.artifactId}${file.separator}build.xml">
+									antfile="${basedir}${file.separator}build.xml">
 									<target name="pre-integration-test" />
 								</ant>
 							</target>
